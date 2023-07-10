@@ -4,3 +4,12 @@ services:
     image: 'postgres:latest'
     environment:
       - POSTGRES_PASSWORD=postgres_password
+  redis:
+    image: 'redis:latest'
+  server:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./server
+    volumes:
+      - /app/node_modules
+      - ~/Projects/Docker/Fibonacci-Calculator/server:/app
