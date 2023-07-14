@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "nodemon": "^3.0.1",
-    "redis": "^4.6.7"
+    "nodemon": "^1.18.3",
+    "redis": "^2.8.0"
   }
 }
