@@ -42,6 +42,8 @@ services:
     volumes:
       - /app/node_modules
       - ~/Projects/Docker/Fibonacci-Calculator/client:/app
+    environment:
+      - WDS_SOCKET_PORT=0
 
   worker:
     build:
