@@ -13,6 +13,9 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./nginx
+    depends_on:
+      - api
+      - client
     ports:
       - '3050:80'
 
@@ -31,6 +34,7 @@ services:
       - PGDATABASE=postgres
       - PGPASSWORD=postgres_password
       - PGPORT=5432
+
   client:
     build:
       dockerfile: Dockerfile.dev
@@ -38,6 +42,7 @@ services:
     volumes:
       - /app/node_modules
       - ~/Projects/Docker/Fibonacci-Calculator/client:/app
+
   worker:
     build:
       dockerfile: Dockerfile.dev
