@@ -13,27 +13,27 @@ jobs:
       - run: docker build -t jheytim/react-test -f ./client/Dockerfile.dev ./client
       - run: docker run -e CI=true jheytim/react-test npm test
 
-      - run: docker build -t jheytim/multi-client-10-14 ./client
-      - run: docker build -t jheytim/multi-nginx-10-14 ./nginx
-      - run: docker build -t jheytim/multi-server-10-14 ./server
-      - run: docker build -t jheytim/multi-worker-10-14 ./worker
+      - run: docker build -t jheytim/multi-client ./client
+      - run: docker build -t jheytim/multi-nginx ./nginx
+      - run: docker build -t jheytim/multi-server ./server
+      - run: docker build -t jheytim/multi-worker ./worker
 
-      - run: docker push jheytim/multi-client-10-14
-      - run: docker push jheytim/multi-nginx-10-14
-      - run: docker push jheytim/multi-server-10-14
-      - run: docker push jheytim/multi-worker-10-14
+      - run: docker push jheytim/multi-client
+      - run: docker push jheytim/multi-nginx
+      - run: docker push jheytim/multi-server
+      - run: docker push jheytim/multi-worker
 
-      - name: Generate deployment package
-        run: zip -r deploy.zip . -x '*.git*'
+      # - name: Generate deployment package
+      #   run: zip -r deploy.zip . -x '*.git*'
 
-      - name: Deploy to EB
-        uses: einaregilsson/beanstalk-deploy@v18
-        with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
-          application_name: multi-gh
-          environment_name: Multi-gh-env
-          # existing_bucket_name: elasticbeanstalk-ap-southeast-1-374329237016
-          region: ap-southeast-1
-          version_label: ${{ github.sha }}
-          deployment_package: deploy.zip
+      # - name: Deploy to EB
+      #   uses: einaregilsson/beanstalk-deploy@v18
+      #   with:
+      #     aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+      #     aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+      #     application_name: multi-gh
+      #     environment_name: Multi-gh-env
+      #     # existing_bucket_name: elasticbeanstalk-ap-southeast-1-374329237016
+      #     region: ap-southeast-1
+      #     version_label: ${{ github.sha }}
+      #     deployment_package: deploy.zip
